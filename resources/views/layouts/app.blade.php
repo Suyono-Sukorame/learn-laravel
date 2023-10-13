@@ -17,31 +17,15 @@
     </style>
 </head>
 <body>
-    <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-lg-auto mb-2 mb-lg-0 text-center">
-                    <ul class="nav justify-content-center">
-                        <li><a href="#" class="nav-link px-2 link-secondary">Beranda</a></li>
-                    </ul>
-                </div>
-                <div class="col-12 col-lg text-center text-lg-end">
-                    <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                </div>
-            </div>
-        </div>
-    </header>
+    
+    @include('layouts.app.header')
+
     <div class="container">
 
     @yield('content')
         
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 text-body-secondary">© 2023 Company, Inc</p>
+    @include('layouts.app.footer')
 
-                <ul class="nav col-md-4 justify-content-end">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-                </ul>
-            </footer>
         </div>
     </body>
 </html>
