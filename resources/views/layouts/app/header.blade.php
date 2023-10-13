@@ -7,7 +7,7 @@
                 </ul>
             </div>
             <div class="col-12 col-lg text-center text-lg-end">
-                <button type="button" class="btn btn-outline-primary me-2">Login</button>
+                <a href="{{ url('login') }}" class="btn btn-outline-primary me-2">Login</a>
             </div>
         </div>
     </div>

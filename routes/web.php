@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\HelloController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::get('/', function () {
 // Route::get('hello', [HelloController::class, 'index']);
 // Route::post('hello', [HelloController::class, 'create']);
 // Route::get('world', [HelloController::class, 'world_message']);
+
+Route::get('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'authenticate']);
 
 Route::post('posts', [PostController::class, 'store']);
 Route::get('posts', [PostController::class, 'index']);
