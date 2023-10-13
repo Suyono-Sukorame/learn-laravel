@@ -17,16 +17,10 @@
     </style>
 </head>
 <body>
-    
-    @include('layouts.app.header')
-
+        @include('layouts.app.header')        
     <div class="container">
-
-    @yield('content')
-        
-    @include('layouts.app.footer')
-
-        </div>
-    </body>
+        @yield('content')
+        @include('layouts.app.footer')
+    </div>
+</body>
 </html>
-
