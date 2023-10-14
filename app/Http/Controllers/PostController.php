@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BlogPosted;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,13 @@ class PostController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+
+        Post::create([
+            'title' => $title,
+            'content' => $content,
+        ]);        
+
+        \Mail::to('abdulaziz@gmail.com')->send(new BlogPosted());
 
         return redirect('posts');
     }
