@@ -11,6 +11,10 @@ class User extends AuthenticatableUser implements Authenticatable
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+
     public static function seed()
     {
         // Data pengguna pertama
@@ -18,7 +22,7 @@ class User extends AuthenticatableUser implements Authenticatable
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
             'email_verified_at' => null,
-            'password' => bcrypt('hashed_password_1'),
+            'password' => password_hash('hashed_password_1', PASSWORD_DEFAULT),
         ]);
 
         // Data pengguna kedua
@@ -26,7 +30,7 @@ class User extends AuthenticatableUser implements Authenticatable
             'name' => 'Jane Smith',
             'email' => 'jane.smith@example.com',
             'email_verified_at' => null,
-            'password' => bcrypt('hashed_password_2'),
+            'password' => password_hash('hashed_password_2', PASSWORD_DEFAULT),
         ]);
 
         // Data pengguna ketiga
@@ -34,7 +38,7 @@ class User extends AuthenticatableUser implements Authenticatable
             'name' => 'Michael Johnson',
             'email' => 'michael.johnson@example.com',
             'email_verified_at' => null,
-            'password' => bcrypt('hashed_password_3'),
+            'password' => password_hash('hashed_password_3', PASSWORD_DEFAULT),
         ]);
     }
 }
