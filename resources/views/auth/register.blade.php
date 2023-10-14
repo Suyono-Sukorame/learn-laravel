@@ -12,28 +12,37 @@
 
                 @if(session()->has('error_message'))
                 <div class="alert alert-danger">
-                    {{ session('error_message') }}
+                    {{ session()->get('error_message') }}
                 </div>
                 @endif
 
-                <form method="POST" action="{{ url('Register') }}">
-                    @csrf <!-- Tambahkan CSRF token untuk keamanan -->
+                <form method="POST" action="{{ url('register') }}">
+                    @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                        <input type="text" class="form-control" id="name" name="name">
                     </div>
+                    @if($errors->has('name'))
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                    @endif
                     
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                        <input type="email" class="form-control" id="email" name="email">
                     </div>
+                    @if($errors->has('email'))
+                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                    @endif
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                        <input type="password" class="form-control" id="password" name="password">
                     </div>
+                    @if($errors->has('password'))
+                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                    @endif
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Enter your password">
+                        <input type="password" class="form-control" id="password" name="password_confirmation">
                     </div>
                     <button type="submit" class="btn btn-primary">Daftar</button>
                 </form>
