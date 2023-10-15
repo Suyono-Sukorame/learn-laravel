@@ -17,9 +17,9 @@ class BlogPosted extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($post)
     {
-        //
+        $this->post = $post;
     }
 
     /**
@@ -28,8 +28,8 @@ class BlogPosted extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('abdulhakim@gmail.com', 'Abdul Hakim'),
-            subject: 'Blog Baru'
+            from: new Address('admin@codepolitan.com', 'Admin Codepolitan'),
+            subject: "Blog Baru: {$this->post->title}",
         );
     }
 
@@ -39,7 +39,10 @@ class BlogPosted extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.blog_posted'
+            view: 'mails.blog_posted',
+            with: [
+                'post' => $this->post
+            ]
         );
     }
 

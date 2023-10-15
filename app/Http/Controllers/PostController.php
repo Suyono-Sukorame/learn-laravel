@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -52,19 +53,14 @@ class PostController extends Controller
         $title = $request->input('title');
         $content = $request->input('content');
 
-        Post::insert([
-            'title' => $title,
-            'content' => $content,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        Post::create([
+        $post = Post::create([
             'title' => $title,
             'content' => $content,
         ]);        
 
-        \Mail::to('abdulaziz@gmail.com')->send(new BlogPosted());
+        \Mail::to(Auth::user()->email)->send(new BlogPosted($post));
+
+        $this->notify_telegram($post);
 
         return redirect('posts');
     }
@@ -143,5 +139,20 @@ class PostController extends Controller
         Post::where('id', $id)->delete();
                 
         return redirect("posts");
+    }
+
+    private function notify_telegram($post)
+    {
+        $api_token = "6454912823:AAHESem5nzUEHFSmBkUHKu4PcMl_yhc7G80";
+        $url = "https://api.telegram.org/bot{$api_token}/sendMessage";
+        $chat_id = -4069295755;
+        $content = "Ada Postingan baru nih di blog kamu, dengan judul: <strong>\"{$post->title}\"</strong>";
+
+        $data = [
+            'chat_id' => $chat_id,
+            'text'   => $content,
+            'parse_mode' => "HTML"
+        ];
+        Http::post($url, $data);
     }
 }
